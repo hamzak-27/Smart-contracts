@@ -1,0 +1,46 @@
+Explanation:
+
+// SPDX-License-Identifier: MIT
+Specifies the license for the contract, indicating it's open-source under the MIT license.
+
+pragma solidity >= 0.8.4;
+Defines the Solidity compiler version required, ensuring the contract is compatible with version 0.8.4 and above.
+
+contract simple_storage {
+Declares the contract named simple_storage.
+
+uint256 public singleNumber = 0;
+A public state variable that stores an unsigned integer singleNumber, initialized to 0.
+
+event StoreNumber(uint256 indexed numberId);
+Defines an event StoreNumber to log when a number is stored, with the indexed keyword allowing filtering of numberId in logs.
+
+function NumberStorage(uint _number) external {
+A function NumberStorage that allows external users to store a number, taking an unsigned integer _number as input.
+
+require(_number >= 0, "Number should be zero or positive");
+Ensures that the input _number is zero or positive, throwing an error if not.
+
+singleNumber = _number;
+Updates the singleNumber state variable with the new number.
+
+emit StoreNumber(singleNumber);
+Emits the StoreNumber event with the current value of singleNumber to log the storage action.
+
+function updateNumber(uint256 _newNumber) external {
+A function updateNumber to modify the stored number, accepting a new unsigned integer _newNumber.
+
+require(_newNumber >= 0, "Number should be zero or positive");
+Ensures that the new number is zero or positive.
+
+singleNumber = _newNumber;
+Updates singleNumber with the new value.
+
+emit StoreNumber(singleNumber);
+Emits the StoreNumber event to log the update action.
+
+function getNumber() external view returns (uint256) {
+A read-only function getNumber to retrieve the current value of singleNumber.
+
+return singleNumber;
+Returns the value of singleNumber.
